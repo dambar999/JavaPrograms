@@ -1,41 +1,51 @@
+package stackqueuelist;
+
+import java.util.ListIterator;
 import java.util.Stack;
 
 public class SortStack {
-
+  
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Stack<Integer> stk= new Stack<Integer>();
-		stk.push(-5);
-		stk.push(5);
-		stk.push(51);
-		stk.push(1);
-		stk.push(8);
-		stk.push(0);
-		sortStack(stk);
-		stk.forEach( (i)->System.out.println(i)  );
-
+      Stack<Integer>s= new Stack<Integer>();
+      s.push(30); 
+      s.push(-5); 
+      s.push(18); 
+     s.push(14); 
+      s.push(-3); 
+      printStck(s);
+      sortStack(s);
+      printStck(s);
+     
 	}
-  public static void sortStack(Stack<Integer> s) {
-	  
-	  if(!s.isEmpty()) {
-		 int e=s.pop(); 
-		 sortStack(s);
-		 insertSortStck(s,e);
-	  }
 	
-}
-  public static void insertSortStck(Stack<Integer> s,int ele) {
-	  if(s.isEmpty() || s.peek()<ele) {
-		  s.push(ele);
-		  return ;
-	  }
-		  
-		 int e=s.pop();
-		 insertSortStck(s,ele);
-		 s.push(e);
-	  }
-	  
- 
+	public static  void sortStack(Stack st) {
+		
+		if(!st.isEmpty()) {
+			//System.out.println("repeatakz" + st.size());
+			int ele=(int) st.pop();
+			sortStack(st);
+			orderInsertion(st,ele);
+		}
+		//System.out.println("repeat" + st.size());
+	}
+	public static void orderInsertion(Stack<Integer> st,int n) {
+		//System.out.println("order insertion");
+		if(st.isEmpty()||st.peek()<=n) {
+			st.push(n);
+			return ;
+		}
+		int e=(int) st.pop();
+		orderInsertion(st,n);
+		st.push(e);
+		
+	}
+	public static  void printStck(Stack<Integer>s) {
+		 ListIterator<Integer> lt = s.listIterator(); 
+         
+	       // forwarding 
+	       while(lt.hasNext()) 
+	          System.out.println(lt.next()); 
+	}
 
-  
 }
